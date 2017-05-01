@@ -19,7 +19,8 @@
 brooklyn.catalog:
   version: 0.0.1-SNAPSHOT
   id: ThreeTierApp
-  itemType: template
+  description: This is the core Apache Brooklyn integration for deployment and in-life management of a three tier webapp. See the Apache Brooklyn documentation for further details of this blueprint 
+  itemType: template.
   name: Three Tier Web App
   publish:
     license_code: Apache-2.0
