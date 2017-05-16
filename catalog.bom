@@ -26,7 +26,15 @@ brooklyn.catalog:
     license_code: Apache-2.0
     qa: catalog.tests.bom
   item:
-    services:
+    type: org.apache.brooklyn.entity.stock.BasicApplication
+    brooklyn.parameters:
+    - name: ssl
+      label: SSL
+      type: org.apache.brooklyn.entity.proxy.ProxySslConfig
+      description: |
+        SSLProxy configuration that sets the ngnix loadbalancer up with ssl certificates
+
+    brooklyn.children:
     - type: org.apache.brooklyn.entity.stock.BasicApplication
       id: app
       brooklyn.children:
@@ -63,6 +71,8 @@ brooklyn.catalog:
         brooklyn.config:
           loadbalancer.serverpool: $brooklyn:entity("cluster")
           nginx.sticky: false
+          ssl: $brooklyn:config("ssl")
+
       - type: org.apache.brooklyn.entity.database.mysql.MySqlNode
         id: db
         name: DB (MySQL)

@@ -27,6 +27,11 @@ brooklyn.catalog:
       services:
       - type: ThreeTierApp
         id: target-app
+        ssl:
+          certificateSourceUrl:
+            "somewhere on github"
+          keySourceUrl:
+            "somewhere on github"
       - type: test-case
         brooklyn.config:
           targetId: target-app
