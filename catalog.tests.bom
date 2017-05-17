@@ -30,9 +30,9 @@ brooklyn.catalog:
         brooklyn.config:
           ssl:
             certificateSourceUrl:
-              "https://raw.githubusercontent.com/duncangrant/brooklyn-three-tier-webapp/add-ssl/resources/domain.crt"
+              "https://raw.githubusercontent.com/brooklyncentral/brooklyn-three-tier-webapp/master/resources/domain.crt"
             keySourceUrl:
-              "https://raw.githubusercontent.com/duncangrant/brooklyn-three-tier-webapp/add-ssl/resources/domain.key"
+              "https://raw.githubusercontent.com/brooklyncentral/brooklyn-three-tier-webapp/master/resources/domain.key"
       - type: test-case
         brooklyn.config:
           targetId: target-app
