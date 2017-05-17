@@ -20,15 +20,31 @@ brooklyn.catalog:
   version: 0.0.1-SNAPSHOT
   id: ThreeTierApp
   description: This is the core Apache Brooklyn integration for deployment and in-life management of a three tier webapp. See the Apache Brooklyn documentation for further details of this blueprint 
-  itemType: template
   name: Three Tier Web App
   publish:
     license_code: Apache-2.0
     qa: catalog.tests.bom
-  item:
-    services:
-    - type: org.apache.brooklyn.entity.stock.BasicApplication
+
+  items:
+  - id: ThreeTierApp
+    name: Three Tier Web App
+    itemType: template
+    item:
+      services:
+      - type: ThreeTierApp-application
+        name: Three Tier Web App
+
+  - id: ThreeTierApp-application
+    itemType: entity
+    item:
+      type: org.apache.brooklyn.entity.stock.BasicApplication
       id: app
+      brooklyn.parameters:
+      - name: ssl
+        label: Cluster SSL
+        type: org.apache.brooklyn.entity.proxy.ProxySslConfig
+        description: |
+          SSLProxy configuration that sets the api cluster loadbalancer up with ssl certificates
       brooklyn.children:
       - type: org.apache.brooklyn.entity.group.DynamicCluster
         name: Cluster
@@ -63,6 +79,7 @@ brooklyn.catalog:
         brooklyn.config:
           loadbalancer.serverpool: $brooklyn:entity("cluster")
           nginx.sticky: false
+          ssl: $brooklyn:config("ssl")
       - type: org.apache.brooklyn.entity.database.mysql.MySqlNode
         id: db
         name: DB (MySQL)

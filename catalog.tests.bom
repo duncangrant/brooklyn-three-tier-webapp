@@ -27,6 +27,12 @@ brooklyn.catalog:
       services:
       - type: ThreeTierApp
         id: target-app
+        brooklyn.config:
+          ssl:
+            certificateSourceUrl:
+              "https://raw.githubusercontent.com/duncangrant/brooklyn-three-tier-webapp/add-ssl/resources/domain.crt"
+            keySourceUrl:
+              "https://raw.githubusercontent.com/duncangrant/brooklyn-three-tier-webapp/add-ssl/resources/domain.key"
       - type: test-case
         brooklyn.config:
           targetId: target-app
